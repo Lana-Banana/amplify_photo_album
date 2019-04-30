@@ -1,0 +1,13 @@
+{
+    "bucketName": "photoseoul",
+    "authPolicyName": "s3_amplify_58a000ee",
+    "unauthPolicyName": "s3_amplify_58a000ee",
+    "authRoleName": {
+        "Ref": "AuthRoleName"
+    },
+    "unauthRoleName": {
+        "Ref": "UnauthRoleName"
+    },
+    "authPermissions": "rw",
+    "unauthPermissions": "r"
+}
