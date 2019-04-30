@@ -15,7 +15,7 @@
 		}
 	},
 	"storage": {
-		"photoseoul": {
+		"s3133e43a2": {
 			"service": "S3",
 			"providerPlugin": "awscloudformation"
 		}

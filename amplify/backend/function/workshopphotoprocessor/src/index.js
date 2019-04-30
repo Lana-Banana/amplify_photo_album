@@ -39,7 +39,7 @@ function fullsizeKey(filename) {
 	return `public/${filename}`;
 }
 
-function makeThumbnail(photo) {
+function  (photo) {
 	return Sharp(photo).resize(THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT).toBuffer();
 }
 
@@ -84,13 +84,13 @@ async function resize(bucketName, key) {
 			height: originalPhotoDimensions.height
 		}
 	};
-};
+} 
 
 async function processRecord(record) {
 	const bucketName = record.s3.bucket.name;
 	const key = record.s3.object.key;
 	
-	if (key.indexOf('uploads') != 0) return;
+	if (key.indexOf('uploads') !== 0) return;
 	
 	const metadata = await getMetadata(bucketName, key);
 	const sizes = await resize(bucketName, key);    
@@ -103,7 +103,7 @@ async function processRecord(record) {
 		thumbnail: sizes.thumbnail,
 		fullsize: sizes.fullsize,
 		createdAt: new Date().getTime()
-	}
+	};
 	await storePhotoInfo(item);
 }
 
