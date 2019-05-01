@@ -39,7 +39,7 @@ function fullsizeKey(filename) {
 	return `public/${filename}`;
 }
 
-function  (photo) {
+function makeThumbnail (photo) {
 	return Sharp(photo).resize(THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT).toBuffer();
 }
 
