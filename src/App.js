@@ -12,6 +12,7 @@ Amplify.configure(aws_exports);
 import NewAlbum from './components/NewAlbum';
 import AlbumsListLoader from './components/AlbumsListLoader';
 import AlbumDetailsLoader from './components/AlbumDetailsLoader';
+import Search from './components/Search';
 
 class App extends Component { 
     render() { 
@@ -21,7 +22,7 @@ class App extends Component {
               <Grid.Column>
                 <Route path="/" exact component={NewAlbum}/>
                 <Route path="/" exact component={AlbumsListLoader}/>
-
+                <Route path="/" exact component={Search}/>
                 <Route
                   path="/albums/:albumId"
                   render={ () => <div><NavLink to='/'>Back to Albums list</NavLink></div> }

@@ -41,3 +41,22 @@ export const GetAlbum = `query GetAlbum($id: ID!, $nextTokenForPhotos: String) {
     }
   }
 }`;
+
+export const SearchPhotos = `query SearchPhotos($label: String!) {
+  searchPhotos(filter: { labels: { match: $label }}) {
+    items {
+      id
+      bucket
+      thumbnail {
+          key
+          width
+          height
+      }
+      fullsize {
+          key
+          width
+          height
+      }
+    }
+  }
+}`;
