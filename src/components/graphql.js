@@ -37,6 +37,11 @@ export const GetAlbum = `query GetAlbum($id: ID!, $nextTokenForPhotos: String) {
           height
           key
         }
+        fullsize {
+          width
+          height
+          key
+        }
       }
     }
   }
