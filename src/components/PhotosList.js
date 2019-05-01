@@ -29,7 +29,7 @@ export default class PhotosList extends Component {
             key={photo.thumbnail.key} 
             imgKey={photo.thumbnail.key.replace('public/', '')} 
             style={{display: 'inline-block', 'paddingRight': '5px'}}
-            onClick={this.handlePhotoClick( photo.fullsize)}
+            onClick={this.handlePhotoClick.bind(this, photo.fullsize)}
         />
         );
     }
