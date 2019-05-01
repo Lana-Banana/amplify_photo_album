@@ -16,7 +16,16 @@ export const SubscribeToNewAlbums = `
   }
 `;
 
-
+export const SubscribeToUpdatedAlbums = `
+  subscription OnUpdateAlbum {
+    onUpdateAlbum {
+      id
+      name
+      owner
+      members
+    }
+  }
+`;
 // export const GetAlbum = `query GetAlbum($id: ID!) {
 //   getAlbum(id: $id) {
 //     id
@@ -29,6 +38,8 @@ export const GetAlbum = `query GetAlbum($id: ID!, $nextTokenForPhotos: String) {
   getAlbum(id: $id) {
     id
     name
+    owner
+    members
     photos(sortDirection: DESC, nextToken: $nextTokenForPhotos) {
       nextToken
       items {

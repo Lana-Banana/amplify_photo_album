@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
-// import { Connect } from 'aws-amplify-react';
 import { API, graphqlOperation } from 'aws-amplify';
-import { Segment, Header, Form } from 'semantic-ui-react';
-import { GetAlbum } from './graphql';
-
-import S3ImageUpload from './S3ImageUpload';
-import PhotosList from './PhotosList';
+import { GetAlbum, SubscribeToUpdatedAlbums } from './graphql';
+import AlbumDetails from './AlbumDetails';
 
 export default class AlbumDetailsLoader extends Component {
     constructor(props) {
@@ -46,8 +42,21 @@ export default class AlbumDetailsLoader extends Component {
     componentDidMount() {
         console.log(this.props);
         this.loadMorePhotos();
+        const subscription = API.graphql(graphqlOperation(SubscribeToUpdatedAlbums)).subscribe({
+            next: (update) => {
+                const album = update.value.data.onUpdateAlbum;
+                this.setState({ 
+                    album: Object.assign(this.state.album, album)
+                });
+            }
+        });
+        this.setState({ 
+            albumUpdatesSubscription: subscription
+        });
     }
-
+    componentWillUnmount() {
+        this.state.albumUpdatesSubscription.unsubscribe();
+    }
     render() {
         return (
             <AlbumDetails 
@@ -69,26 +78,4 @@ export default class AlbumDetailsLoader extends Component {
             </Connect>
         );
     } */
-}
-
-class AlbumDetails extends Component {
-    render() {
-        if (!this.props.album) return 'Loading album...';
-        return (
-            <Segment>
-                <Header as='h3'>{this.props.album.name}</Header>
-                <S3ImageUpload albumId={this.props.album.id}/>       
-                <PhotosList photos={this.props.album.photos.items} />
-                {
-                    this.props.hasMorePhotos && 
-                    <Form.Button
-                    onClick={this.props.loadMorePhotos}
-                    icon='refresh'
-                    disabled={this.props.loadingPhotos}
-                    content={this.props.loadingPhotos ? 'Loading...' : 'Load more photos'}
-                    />
-                }
-            </Segment>
-        );
-    }
 }
